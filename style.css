@@ -1,0 +1,35 @@
+main {
+    height: 100vh;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: auto auto auto auto;
+    grid-template-rows: auto auto auto;
+}
+
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+}
+
+div:nth-child(10) {
+    background-color: yellowgreen;
+    /*grid-column-start: 2;*/
+    /* con un valor negativo siempre llegara al final */
+    /*grid-column-end: -1;*/
+    /* esta es la forma con menos codigo y se logra lo mismo de arriba */
+    grid-column: 3 / -1;
+}
+
+div:nth-child(6) {
+    background-color: bisque;
+    /* solo con la configuracion de la abajo se va a la izquierda */
+    /* esto es porque no le hemos dicho en que columna y por defecto va a la 1ra */
+    /* va a necesitar de grid-column */
+   /* grid-row-start: 2;
+    grid-row-end: 4;*/
+    grid-column: 2 / 3;
+    /* short hand */
+    grid-row: 2 / 4;
+}
