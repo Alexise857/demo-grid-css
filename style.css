@@ -1,35 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 main {
     height: 100vh;
     display: grid;
-    grid-gap: 10px;
-    grid-template-columns: auto auto auto auto;
-    grid-template-rows: auto auto auto;
+    /*  Los gap por debajo usan esta propiedad
+    row-gap: 30px;
+    column-gap: 15px;
+    */
+    grid-gap: 30px 15px;
+
+    /*grid-template-columns: auto auto auto;*/
+    /*grid-template-columns: 1fr 1fr 1fr;*/
+    /* El repeat nos ayudara a hacer lo mismo que arriba.
+     Primer argumento es cuantas veces lo queremos repetir
+     El segundo argumento es que valor queremos repetir
+     */
+    /*grid-template-columns: repeat(3, auto);*/
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    /* Implicitamenete para lo grid items que se generen después que ocupen un espacio especifico
+    Asi tenemos el mismo width para elementos que controlamos como para los que no controlamos
+    */
+    grid-auto-rows: 1fr;
 }
 
 div {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: aquamarine;
+    background-color: purple;
+    color: white;
 }
 
-div:nth-child(10) {
-    background-color: yellowgreen;
-    /*grid-column-start: 2;*/
-    /* con un valor negativo siempre llegara al final */
-    /*grid-column-end: -1;*/
-    /* esta es la forma con menos codigo y se logra lo mismo de arriba */
-    grid-column: 3 / -1;
-}
-
-div:nth-child(6) {
-    background-color: bisque;
-    /* solo con la configuracion de la abajo se va a la izquierda */
-    /* esto es porque no le hemos dicho en que columna y por defecto va a la 1ra */
-    /* va a necesitar de grid-column */
-   /* grid-row-start: 2;
-    grid-row-end: 4;*/
-    grid-column: 2 / 3;
-    /* short hand */
-    grid-row: 2 / 4;
-}
