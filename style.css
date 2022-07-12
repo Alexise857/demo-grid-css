@@ -1,36 +1,50 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
 }
+
 main {
     height: 100vh;
     display: grid;
-    /*  Los gap por debajo usan esta propiedad
-    row-gap: 30px;
-    column-gap: 15px;
-    */
-    grid-gap: 30px 15px;
+    grid-gap: 10px;
+    /*grid-template-columns: 1fr 2fr;*/
+    /*grid-template-rows: repeat(2, 1fr);*/
+    grid-template-columns:
+            [sidebar-start] 1fr
+            [contenido-start] 2fr;
 
-    /*grid-template-columns: auto auto auto;*/
-    /*grid-template-columns: 1fr 1fr 1fr;*/
-    /* El repeat nos ayudara a hacer lo mismo que arriba.
-     Primer argumento es cuantas veces lo queremos repetir
-     El segundo argumento es que valor queremos repetir
-     */
-    /*grid-template-columns: repeat(3, auto);*/
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
-    /* Implicitamenete para lo grid items que se generen después que ocupen un espacio especifico
-    Asi tenemos el mismo width para elementos que controlamos como para los que no controlamos
-    */
-    grid-auto-rows: 1fr;
+    grid-template-rows:
+            [header-start] 1fr
+            [contenido-start] 2fr
+            [footer-start] 1fr;
+
 }
 
-div {
+main > * {
+    font-family: sans-serif;
+    background-color: goldenrod;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: purple;
-    color: white;
 }
 
+header {
+    /*grid-column: 1 / 3;
+     with span we say: I want you to span for 2 columns
+     span in spanish: extenderse
+     grid-column: sidebar-start / span 2;
+     with negative 1, we span it till the end */
+    grid-column: sidebar-start / -1;
+}
+
+article {
+    grid-column: contenido-start;
+}
+
+aside {
+    grid-row: contenido-start /-1 ;
+}
+
+footer {
+    grid-column: contenido-start;
+}
