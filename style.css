@@ -11,12 +11,15 @@ main {
     /*grid-template-rows: repeat(2, 1fr);*/
     grid-template-columns:
             [sidebar-start] 1fr
-            [contenido-start] 2fr;
+            [sidebar-end contenido-start] 2fr
+            [contenido-end]; /* No tenemos que ponerle ningún tamaño, ahi acaba, no hay más sitio */
 
     grid-template-rows:
             [header-start] 1fr
-            [contenido-start] 2fr
-            [footer-start] 1fr;
+            [header-end contenido-start] 2fr
+            /* también se puede leer, antes que empiece el  footer, termina el contenido start */
+            [contenido-end footer-start] 1fr
+            [footer-end];
 
 }
 
@@ -34,17 +37,22 @@ header {
      span in spanish: extenderse
      grid-column: sidebar-start / span 2;
      with negative 1, we span it till the end */
-    grid-column: sidebar-start / -1;
+    grid-column: sidebar-start / contenido-end;
+    /* podemos ser más explícitos con los row */
+    grid-row: header-start / header-end;
 }
 
 article {
-    grid-column: contenido-start;
+    grid-column: contenido-start / contenido-end;
+    grid-row: contenido-start / contenido-end ;
 }
 
 aside {
-    grid-row: contenido-start /-1 ;
+    grid-column: sidebar-start / sidebar-end;
+    grid-row: contenido-start / footer-end;
 }
 
 footer {
-    grid-column: contenido-start;
+    grid-column: contenido-start / contenido-end;
+    grid-row: footer-start / footer-end ;
 }
