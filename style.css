@@ -1,21 +1,21 @@
+/* TIP: siempre pensar en mobile first */
+
 * {
     padding: 0;
     margin: 0;
 }
 
-/*
-fr no le da una medida exacta, sino aprovecha el espacio disponible
-*/
-
 main {
     height: 100vh;
     display: grid;
     grid-gap: 10px;
-    /*grid-template-columns: 300px 1fr 30%*/
-    /* la fr tomará el espacio disponible después de haber asignado los demás espacios */
-    grid-template-columns: 1fr 1fr 1fr;
-    /*grid-template-rows: 1fr 1fr 1fr;*/
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        "header"
+        "izquierda"
+        "contenido"
+        "derecha"
+        "footer"
+    ;
 }
 
 main > * {
@@ -25,17 +25,55 @@ main > * {
     align-items: center;
 }
 
- /*de esta medida para abajo*/
+/* Nombrar las areas del layout */
 
-@media (max-width: 992px) {
+header {
+    grid-area: header;
+}
+
+aside:first-of-type {
+    grid-area: izquierda;
+}
+
+article {
+    grid-area: contenido;
+}
+
+aside:last-of-type {
+    grid-area: derecha;
+}
+
+footer {
+    grid-area: footer;
+}
+
+/*
+@media (min-width: 900px) {
     main {
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(5, 1fr);
+        grid-template-areas:
+        "footer"
+        "izquierda"
+        "contenido"
+        "derecha"
+        "header"
+        ;
     }
 }
-@media (max-width: 576px) {
+*/
+
+@media (min-width: 1200px) {
     main {
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(9, 1fr);
+        grid-template-areas:
+        "header header derecha"
+        "izquierda contenido derecha"
+        /*"izquierda footer ." con el punto no ocupamos el espacio asignado */
+        "izquierda footer derecha"
+        ;
+        /* están bien posicionados,
+           pero nos gustaría darles a algunos màs tamaño y a otros menos
+           Para eso podemos usar la propiedad templeate comlumns y row
+        */
+        grid-template-rows: 2fr 5fr 1fr;
+        grid-template-columns: 1fr 2fr 1fr;
     }
 }
