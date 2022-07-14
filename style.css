@@ -3,13 +3,7 @@ main {
     display: grid;
     grid-gap: 10px;
 
-    grid-template-columns: 200px 100px;
-    grid-auto-flow: column;
-    /* explicit grid son los elementos que estamos controlando */
-    /* implicit grid son los elementos que no estamos controlando, no hemos diseñado algo para que se comporte,
-       asi el navegador les da u tamaño automatico */
-    /* aqui podemos usar, repeat, minmax, patrones, etc */
-    grid-auto-columns: 600px;
+    grid-template-columns: repeat(auto-fit, minmax(30px, auto));
 }
 
 div {
@@ -19,12 +13,25 @@ div {
     background-color: goldenrod;
 }
 
-div:first-of-type, div:nth-child(2){
-    background-color: red;
+div:nth-child(1) {
+    order: 4;
 }
-/* ¿ Cómo controlamos los elementos implicit?
-       La clase grid-template-columns controla los elementos explicit.
-       los elementos que no controlamos se generan automaticamente,
-       si son columns que no controlamos usaremos grid-auto-columns
-       si son row que no controlamos usaremos grid-auto-rows
-*/
+
+div:nth-child(2) {
+    background-color: purple;
+    color: #fff;
+    order: 1;
+}
+
+div:nth-child(3) {
+    order: 2;
+}
+
+div:nth-child(4) {
+    order: 3;
+}
+
+/* si solo una porpiedad tuvera orden, para el CSS los demas su orden es 0,
+    no lo hemos inicializado, el -1 lo manda al inicio, se posiscion segun la aparicion
+    si tuviera 4 y le pongo 6, se iria al final
+    */
