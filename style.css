@@ -1,5 +1,3 @@
-/* TIP: siempre pensar en mobile first */
-
 * {
     padding: 0;
     margin: 0;
@@ -9,13 +7,31 @@ main {
     height: 100vh;
     display: grid;
     grid-gap: 10px;
-    grid-template-areas:
-        "header"
-        "izquierda"
-        "contenido"
-        "derecha"
-        "footer"
-    ;
+    grid-template-columns:
+            /* estas columnas ya tienen un espacio designado,
+               ósea son flexibles: ocuparan 1fr de las 8 partes dividas a nivel horizontal
+               porque son columnas.
+               Si crece el ancho de la pantalla, se reparten equitativamente
+             */
+            /* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
+            /* repeat( 8, 1fr );*/
+            /* minmax establece limites, uno mínimo y otro máximo */
+            /* 8 columnas con un mínimo y un máximo (limite)
+              10px como mínimo y no bajara de ahi, y como máximo (cuando hay espacio disponible) 1 fr
+            */
+            /*repeat( 8, minmax(10px, 1fr) );*/
+
+            /* 8 columnas con un patrón de dos (30px y mínimo 10% y máximo flexible [1fr] ) */
+            /* usamos 4 porque le pasamos 2 valores: 2 * 4 = 8 columnas */
+            /*repeat( 4, 30px minmax(10px, 1fr) );*/
+            /* cuando el contenido excede se crea un overflow, se sale de su contenedor */
+
+            /* 8 columnas con un mínimo marcado por el contendido y un máximo del 30% */
+            /* min-content: minimo marcado por el contenido, nunca se sobrepasara, no habrá overflow */
+            /*repeat( 8, minmax( min-content, 30% ) );*/
+
+            /* 8 columnas con un maximo y minimo marcado por su contenido, sin usar medidas, solo depende del contenido */
+            repeat( 8, minmax( min-content, max-content ) );
 }
 
 main > * {
@@ -23,57 +39,4 @@ main > * {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-/* Nombrar las areas del layout */
-
-header {
-    grid-area: header;
-}
-
-aside:first-of-type {
-    grid-area: izquierda;
-}
-
-article {
-    grid-area: contenido;
-}
-
-aside:last-of-type {
-    grid-area: derecha;
-}
-
-footer {
-    grid-area: footer;
-}
-
-/*
-@media (min-width: 900px) {
-    main {
-        grid-template-areas:
-        "footer"
-        "izquierda"
-        "contenido"
-        "derecha"
-        "header"
-        ;
-    }
-}
-*/
-
-@media (min-width: 1200px) {
-    main {
-        grid-template-areas:
-        "header header derecha"
-        "izquierda contenido derecha"
-        /*"izquierda footer ." con el punto no ocupamos el espacio asignado */
-        "izquierda footer derecha"
-        ;
-        /* están bien posicionados,
-           pero nos gustaría darles a algunos màs tamaño y a otros menos
-           Para eso podemos usar la propiedad templeate comlumns y row
-        */
-        grid-template-rows: 2fr 5fr 1fr;
-        grid-template-columns: 1fr 2fr 1fr;
-    }
 }
