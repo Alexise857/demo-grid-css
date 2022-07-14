@@ -1,23 +1,15 @@
-body {
-    margin: 0;
-    padding: 0;
-    background-color: white;
-}
-
 main {
-    width: 100vw;
     height: 100vh;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+    grid-gap: 10px;
 
-    grid-auto-rows: minmax(150px, 1fr); /* para los elementos implícitos en row */
-    grid-auto-columns: minmax(150px, 1fr); /* para los elementos implícitos en col */
-    /* auto-placement */
-    /*grid-auto-flow: row; ---- el valor de row es por defecto */
-    /*grid-auto-flow: column;*/
-    /*grid-auto-flow: column dense;*/
-    grid-auto-flow: row dense;
+    grid-template-columns: 200px 100px;
+    grid-auto-flow: column;
+    /* explicit grid son los elementos que estamos controlando */
+    /* implicit grid son los elementos que no estamos controlando, no hemos diseñado algo para que se comporte,
+       asi el navegador les da u tamaño automatico */
+    /* aqui podemos usar, repeat, minmax, patrones, etc */
+    grid-auto-columns: 600px;
 }
 
 div {
@@ -25,27 +17,14 @@ div {
     justify-content: center;
     align-items: center;
     background-color: goldenrod;
-    border: 1px solid black;
 }
 
-div:nth-child(3n) {
-    background-color: blueviolet;
-    /*grid-row-end: span 2;*/
-    /* lo curioso con el column es que deja un espacio en blanco  */
-    grid-column-end: span 2;
+div:first-of-type, div:nth-child(2){
+    background-color: red;
 }
-
-div:nth-child(8n) {
-    background-color: brown;
-    grid-row-end: span 2;
-}
-
-div:nth-child(14n) {
-    background-color: cadetblue;
-    grid-column-end: span 2;
-    grid-row-end: span 2;
-}
-
-/* packing modes le dice a los elementos anteriores del blanco que los ocupe,
-   si tiene espacio, que los ocupe, si no lo tiene, que se quede,
-   tenemos que agregar  grid-auto-flow: row dense; */
+/* ¿ Cómo controlamos los elementos implicit?
+       La clase grid-template-columns controla los elementos explicit.
+       los elementos que no controlamos se generan automaticamente,
+       si son columns que no controlamos usaremos grid-auto-columns
+       si son row que no controlamos usaremos grid-auto-rows
+*/
