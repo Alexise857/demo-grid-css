@@ -1,40 +1,51 @@
-* {
-    padding: 0;
+body {
     margin: 0;
+    padding: 0;
+    background-color: white;
 }
 
-section {
+main {
+    width: 100vw;
+    height: 100vh;
     display: grid;
-    grid-gap: 10px;
-    margin: 20px 0;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(150px, 1fr));
+
+    grid-auto-rows: minmax(150px, 1fr); /* para los elementos implícitos en row */
+    grid-auto-columns: minmax(150px, 1fr); /* para los elementos implícitos en col */
+    /* auto-placement */
+    /*grid-auto-flow: row; ---- el valor de row es por defecto */
+    /*grid-auto-flow: column;*/
+    /*grid-auto-flow: column dense;*/
+    grid-auto-flow: row dense;
 }
 
-section div {
+div {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 50px;
+    background-color: goldenrod;
+    border: 1px solid black;
 }
 
-.auto-fill div {
-    background-color: teal;
-    color: white;
+div:nth-child(3n) {
+    background-color: blueviolet;
+    /*grid-row-end: span 2;*/
+    /* lo curioso con el column es que deja un espacio en blanco  */
+    grid-column-end: span 2;
 }
 
-.auto-fit div {
+div:nth-child(8n) {
     background-color: brown;
-    color: white;
+    grid-row-end: span 2;
 }
 
-.auto-fill {
-    /* auto-fill nos permite que los elementos que pasen el limite, caigan uno con otro */
-    /* auto-fill: autogeneral más bloques para completar el layout completo */
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+div:nth-child(14n) {
+    background-color: cadetblue;
+    grid-column-end: span 2;
+    grid-row-end: span 2;
 }
 
-.auto-fit {
-    /* auto-fit nos permite que los elementos encajen sin importar su contenido */
-    /* solo bajara el elemento cuando su tamaño sea como minimo 99px, 100px caben */
-    /* lo que hace es expandir esos bloques hasta completar la panatalla completa en partes iguales */
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-}
+/* packing modes le dice a los elementos anteriores del blanco que los ocupe,
+   si tiene espacio, que los ocupe, si no lo tiene, que se quede,
+   tenemos que agregar  grid-auto-flow: row dense; */
