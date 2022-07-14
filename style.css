@@ -7,36 +7,34 @@ main {
     height: 100vh;
     display: grid;
     grid-gap: 10px;
+
     grid-template-columns:
-            /* estas columnas ya tienen un espacio designado,
-               ósea son flexibles: ocuparan 1fr de las 8 partes dividas a nivel horizontal
-               porque son columnas.
-               Si crece el ancho de la pantalla, se reparten equitativamente
-             */
-            /* 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; */
-            /* repeat( 8, 1fr );*/
-            /* minmax establece limites, uno mínimo y otro máximo */
-            /* 8 columnas con un mínimo y un máximo (limite)
-              10px como mínimo y no bajara de ahi, y como máximo (cuando hay espacio disponible) 1 fr
-            */
-            /*repeat( 8, minmax(10px, 1fr) );*/
-
-            /* 8 columnas con un patrón de dos (30px y mínimo 10% y máximo flexible [1fr] ) */
-            /* usamos 4 porque le pasamos 2 valores: 2 * 4 = 8 columnas */
-            /*repeat( 4, 30px minmax(10px, 1fr) );*/
-            /* cuando el contenido excede se crea un overflow, se sale de su contenedor */
-
-            /* 8 columnas con un mínimo marcado por el contendido y un máximo del 30% */
-            /* min-content: minimo marcado por el contenido, nunca se sobrepasara, no habrá overflow */
-            /*repeat( 8, minmax( min-content, 30% ) );*/
-
-            /* 8 columnas con un maximo y minimo marcado por su contenido, sin usar medidas, solo depende del contenido */
-            repeat( 8, minmax( min-content, max-content ) );
+            /*1fr 1fr 1fr*/
+            /*repeat(12, 1fr);*/
+            /* con el start marcamos el inicio y el final ( end ) nombrado */
+            /* podemos nombrar las columnas dentro del repeat */
+            [start]
+            repeat(4,
+                  [ col-lg-start ] minmax(100px, 1fr)
+                  [ col-lg-end col-md-start ]  minmax(50px, 1fr)
+                  [ col-md-end col-sm-start ]  minmax(20px, 1fr)
+                  [ col-sm-end ]
+            )
+            [end]
+            ;
+;
 }
 
-main > * {
+div {
     background-color: goldenrod;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+div:first-of-type {
+    background-color: red;
+    /*grid-column: col-lg-start / col-lg-end ;*/
+    /*grid-column: col-lg-start / col-sm-end ;*/
+    grid-column: start / end ;
 }
