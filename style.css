@@ -3,38 +3,38 @@
     margin: 0;
 }
 
-main {
-    height: 100vh;
+section {
     display: grid;
     grid-gap: 10px;
-
-    grid-template-columns:
-            /*1fr 1fr 1fr*/
-            /*repeat(12, 1fr);*/
-            /* con el start marcamos el inicio y el final ( end ) nombrado */
-            /* podemos nombrar las columnas dentro del repeat */
-            [start]
-            repeat(4,
-                  [ col-lg-start ] minmax(100px, 1fr)
-                  [ col-lg-end col-md-start ]  minmax(50px, 1fr)
-                  [ col-md-end col-sm-start ]  minmax(20px, 1fr)
-                  [ col-sm-end ]
-            )
-            [end]
-            ;
-;
+    margin: 20px 0;
 }
 
-div {
-    background-color: goldenrod;
+section div {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 50px;
 }
 
-div:first-of-type {
-    background-color: red;
-    /*grid-column: col-lg-start / col-lg-end ;*/
-    /*grid-column: col-lg-start / col-sm-end ;*/
-    grid-column: start / end ;
+.auto-fill div {
+    background-color: teal;
+    color: white;
+}
+
+.auto-fit div {
+    background-color: brown;
+    color: white;
+}
+
+.auto-fill {
+    /* auto-fill nos permite que los elementos que pasen el limite, caigan uno con otro */
+    /* auto-fill: autogeneral más bloques para completar el layout completo */
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+}
+
+.auto-fit {
+    /* auto-fit nos permite que los elementos encajen sin importar su contenido */
+    /* solo bajara el elemento cuando su tamaño sea como minimo 99px, 100px caben */
+    /* lo que hace es expandir esos bloques hasta completar la panatalla completa en partes iguales */
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
