@@ -1,37 +1,36 @@
-main {
-    height: 100vh;
+#grid-1 {
     display: grid;
+    height: 100vh;
     grid-gap: 10px;
 
-    grid-template-columns: repeat(auto-fit, minmax(30px, auto));
+    grid-template-columns: repeat(auto-fit, minmax(100px, auto));
 }
 
 div {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#grid-1 > div {
     background-color: goldenrod;
 }
 
-div:nth-child(1) {
-    order: 4;
+#grid-1 > div:nth-child(5) {
+    background-color: white;
+    display: block;
 }
 
-div:nth-child(2) {
-    background-color: purple;
-    color: #fff;
-    order: 1;
+#grid-2 {
+    display: grid;
+    grid-gap: 20px;
+    height: 100%;
+
+    grid-template-columns: repeat(2, 1fr);
 }
 
-div:nth-child(3) {
-    order: 2;
+#grid-2 > div {
+    background-color: deeppink;
 }
 
-div:nth-child(4) {
-    order: 3;
-}
-
-/* si solo una porpiedad tuvera orden, para el CSS los demas su orden es 0,
-    no lo hemos inicializado, el -1 lo manda al inicio, se posiscion segun la aparicion
-    si tuviera 4 y le pongo 6, se iria al final
-    */
+/* podemos tener un grid que dentro tenga otro grid com más elementos: */
