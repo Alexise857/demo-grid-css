@@ -4,30 +4,21 @@ main {
     height: 100vh;
     grid-gap: 10px;
 
-    /* Esta es la manera corta
-    grid-template-areas:
-        "header header header"
-        "izquierda contenido derecha-1"
-        "izquierda contenido derecha-2"
-        "izquierda footer footer"
-    ;
-    grid-template-rows:
-        [inicio] 1fr [contenido-start] 2fr 1fr 1fr [fin]
-    ;
-    grid-template-columns:
-        [inicio] 1fr [contenido-start] 2fr 1fr [fin]
-    ;
-    */
     grid-template:
-        /* Filas */
-        [inicio] "header header header" 1fr
-        [contenido-start] "izquierda contenido derecha-1" 2fr
-        "izquierda contenido derecha-2" 1fr
-        "izquierda footer footer" 1fr [fin]
-        / /* <----- Esto le dirá a grid que empezaremos con las columnas */
-        /* Columnas */
-        [inicio] 1fr [contendido-start] 2fr 1fr [fin]
+        /* FILAS */
+        repeat(4, 50px)
+        /
+        /* COLUMNAS */
+        repeat(3, 1fr);
     ;
+    /*justify-items: start;*/
+    /*justify-items: center;*/
+    /*justify-items: end;*/
+    /* esta es la propiedad default de css grid,
+    esta expande el item sin importar su contenido
+       ocupa todo el contenido
+     */
+    justify-items: stretch;
 }
 
 main > * {
@@ -37,30 +28,3 @@ main > * {
     background-color: goldenrod;
 }
 
-header {
-    grid-area: header
-}
-
-aside:nth-of-type(1) {
-    grid-area: izquierda;
-}
-
-article {
-    grid-area: contenido;
-}
-
-aside:nth-of-type(2) {
-    grid-area: derecha-1;
-}
-
-aside:nth-of-type(3) {
-    grid-area: derecha-2;
-}
-
-footer {
-    grid-area: footer;
-}
-
-/* css grid no sabe por si solo que es una fila o columna, pero en su regla
-   primero se posiciona las filas y luego la columna
- */
