@@ -5,20 +5,15 @@ main {
     grid-gap: 10px;
 
     grid-template:
-        /* FILAS */
-        repeat(4, 50px)
-        /
-        /* COLUMNAS */
-        repeat(3, 1fr);
+        repeat(4, 50px) / repeat(3, 1fr);
     ;
-    /*justify-items: start;*/
-    /*justify-items: center;*/
-    /*justify-items: end;*/
-    /* esta es la propiedad default de css grid,
-    esta expande el item sin importar su contenido
-       ocupa todo el contenido
-     */
+    /* Row Axis */
     justify-items: stretch;
+    /* Column Axis */
+    /*align-items: start;*/
+    align-items: center;
+    /*align-items: end;*/
+    /*align-items: stretch;*/ /* <---- por defecto */
 }
 
 main > * {
