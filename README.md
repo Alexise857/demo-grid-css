@@ -1,3 +1,3 @@
-# GRID
+# GRID Example
 
 Alexis Espinoza Silloca
